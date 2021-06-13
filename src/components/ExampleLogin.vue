@@ -9,7 +9,7 @@
       <input type="password" v-model="userPass">
       </label> <br>
       <button @click="checkPass">Go</button>
-      <img :src="imageSrc" alt="picture" v-if="checkPass">
+      <span>{{authResultMessage}}</span>
     </div>
 </template>
 

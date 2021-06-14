@@ -9,7 +9,9 @@
       <input type="password" v-model="userPass">
       </label> <br>
       <button @click="checkPass">Go</button>
-      <span>{{authResultMessage}}</span>
+      <div v-if="checkAutorize">
+          <img :src="imageSrc", alt="picture"/>
+       </div>
     </div>
 </template>
 
@@ -24,9 +26,9 @@
         },
         data () {
             return {
-               userLogin:"",
-               userPass :"",
-               authResultMessage: null,
+               userLogin:null,
+               userPass :null,
+               checkAutorize: null,
                loginBase : [
                   {
                   login: "Ivan", 
@@ -49,12 +51,9 @@
         },
         methods: {
         checkPass() {
-      if (
-        this.loginBase.some(
-          (item) => this.userLogin == item.login && this.userPass == item.pass
-          )
-        )
-          this.authResultMessage = "Вірно"
+           if (
+           this.loginBase.some( (item) => this.userLogin == item.login && this.userPass == item.pass) )
+           return checkAutorize
           else this.authResultMessage = "Некоректний логін або пароль!"
       }
     }

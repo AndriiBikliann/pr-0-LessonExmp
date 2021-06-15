@@ -4,62 +4,80 @@
       Введіть логін
       <input type="text" v-model="userLogin">
       </label> <br>
+
       <label>
       Введіть пароль
-      <input type="password" v-model="userPass">
+      <input type="password" v-model.number="userPass">
       </label> <br>
+
       <button @click="checkPass">Go</button>
+
       <div v-if="checkAutorize">
-          <img :src="imageSrc", alt="picture"/>
+          <div v-if="checkAutorize===loginValue.CORRECT">
+            <img src="imageSrc" alt="picture">
+          </div>
+          <div v-else-if="checkAutorize===loginValue.INCORRECT_IVAN" :class="getClass()"> Невірний логін </div>
+          <div v-else :class="getClass()"> Невірний логін і пароль</div>
        </div>
     </div>
 </template>
 
 <script>
+import { loginValue } from './settings.js'
     export default {
         name : 'ExampleLogin',
         props: {
             imageSrc: {
                 type: String,
                 default:"https://image.freepik.com/free-vector/smile-logo-template_8163-40.jpg"
+            },
+            userDataArray: {
+                type:Array,
+                default: ()=>[]
             }
+
         },
         data () {
             return {
                userLogin:null,
                userPass :null,
                checkAutorize: null,
-               loginBase : [
-                  {
-                  login: "Ivan", 
-                  pass:"111"
-                  },
-                  {
-                  login: "Petro", 
-                  pass:"222"
-                  },
-                  {
-                  login: "Roma", 
-                  pass:"333"
-                  },
-                  {
-                  login: "Stas", 
-                  pass:"444"
-                  }, 
-                 ],
-            };
+               loginValue,
+         }
         },
         methods: {
-        checkPass() {
-           if (
-           this.loginBase.some( (item) => this.userLogin == item.login && this.userPass == item.pass) )
-           return checkAutorize
-          else this.authResultMessage = "Некоректний логін або пароль!"
-      }
+          checkPass () {
+              if(
+                  this.userDataArray.some(
+                      (item)=> this.login===item.login&& this.password===item.password
+                  )
+                ) {
+              this.checkAutorize = loginValue.CORRECT
+              return;
+                }
+              if (this.login === 'Ivan')
+                  this.value = loginValue.INCORRECT_IVAN;
+                  else
+                  this.value = loginValue.INCORRECT
+              
+        },
+        getClass() {
+            if (this.userLogin === "Ivan") {
+                return (this.loginValue = "blue");
+            }
+            else {
+                return (this.loginValue = "red")
+            }
+        }
     }
  }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="css" scoped>
+.red {
+    color: red;
+}
+.blue {
+    color: blue;
+}
 </style>

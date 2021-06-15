@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <example-login/>
+    <example-login :userDataArray="userDataArray"/>
     <product-card
     :user-money="1000"
     :products="dataProductsList"
@@ -36,6 +36,24 @@ export default {
         title:"TV2",
         price:10000
       },
+    ],
+    userDataArray: [
+      {
+        login: "Ivan", 
+        pass:"111"
+      },
+      {
+      login: "Petro", 
+      pass:"222"
+      },
+      {
+      login: "Roma", 
+      pass:"333"
+      },
+      {
+      login: "Stas", 
+      pass:"444"
+      }, 
     ]
   }
  }

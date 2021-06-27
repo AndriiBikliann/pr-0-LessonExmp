@@ -1,25 +1,37 @@
 <template>
   <div id="app">
-    <example-login :userDataArray="userDataArray"/>
     <product-card
     :user-money="1000"
     :products="dataProductsList"
     />
+    <br>
+    <age-solver-n :user-age="age"/>
+    <label>
+      Введіть вік користувача
+      <input type="number" v-model="age">
+    </label>
+    <br>
+    <product-table
+     :user-money="5000"
+     :products="dataProductsList"/>
   </div>
 </template>
 
 <script>
-import ExampleLogin from './components/ExampleLogin.vue'
 import ProductCard from './components/ProductCard.vue'
+import AgeSolverN from './components/AgeSolverN.vue'
+import ProductTable from './components/ProductTable.vue'
 
 export default {
   name: 'App',
   components: {
-    ExampleLogin,
-    ProductCard
+    ProductCard,
+    AgeSolverN,
+    ProductTable
   },
   data() {
     return {
+    age: 21,
     dataProductsList: [
       {
         id:1,
@@ -37,24 +49,6 @@ export default {
         price:10000
       },
     ],
-    userDataArray: [
-      {
-        login: "Ivan", 
-        pass:"111"
-      },
-      {
-      login: "Petro", 
-      pass:"222"
-      },
-      {
-      login: "Roma", 
-      pass:"333"
-      },
-      {
-      login: "Stas", 
-      pass:"444"
-      }, 
-    ]
   }
  }
 }
